@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Choose Your Genre</title>
+<script>
+if (localStorage.getItem("loggedIn") !== "true") {
+    window.location.href = "signup.html";
+}
+</script>
+<style>
+body{
+    margin:0;
+    font-family: "Georgia", serif;
+    background-image: url("vintage-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+/* Overlay for readability */
+.overlay{
+    background: rgba(255, 248, 220, 0.75);
+    min-height: 100vh;
+    padding: 50px;
+}
+
+/* Heading */
+h1{
+    text-align: center;
+    font-size: 40px;
+    color: #5a3e2b;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+/* Genre box */
+.genres-box{
+    max-width: 400px;
+    margin: auto;
+    background: rgba(255,255,255,0.6);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Genre list */
+.genre{
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #7a5a3a;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.genre:hover{
+    background: #7a5a3a;
+    color: #fff;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+
+    <h1>✨ Choose Your Genres ✨</h1>
+
+    <div class="genres-box">
+        <div class="genre">📖 Horror</div>
+        <div class="genre">❤️ Love</div>
+        <div class="genre">🌹 Romantic</div>
+        <div class="genre">🕯 Mystery</div>
+        <div class="genre">🧙 Fantasy</div>
+    </div>
+
+</div>
+
+</body>
+</html>          library.html
+
+
+
+
+<div class="genres-box">
+    <div class="genre">🎸 Guitars</div>
+    <div class="genre">🎹 Keyboards</div>
+    <div class="genre">🥁 Drums</div>
+    <div class="genre">🎻 Strings</div>
+    <div class="genre">🎷 Wind Instruments</div>
+</div>

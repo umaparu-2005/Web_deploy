@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reviews | Musical Haven</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Bootstrap & font -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{ font-family: 'Poppins', sans-serif; }
+    body{
+      background: radial-gradient(circle at top, #dbdbfa, #71459a);
+      color:#fff;
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .review-card{
+      background: rgba(0,0,0,0.45);
+      border-radius:20px;
+      padding:24px 28px;
+      width:100%;
+      max-width:700px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.6);
+    }
+    .review-list-item{
+      background: rgba(255,255,255,0.08);
+      border-radius:12px;
+      padding:10px 14px;
+      margin-bottom:10px;
+    }
+    .rating-star{
+      color:#ffc800;
+      cursor:pointer;
+      font-size:1.3rem;
+    }
+    .rating-star.inactive{
+      color:#aaaaaa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="review-card">
+    <h2 class="mb-3 text-center">Product Reviews</h2>
+    <p id="noReviewsMsg" class="text-center text-muted mb-3">
+      No reviews yet. Be the first to review!
+    </p>
+
+    <!-- where reviews will appear -->
+    <div id="reviewList" class="mb-4"></div>
+
+    <!-- review form -->
+    <h5 class="mb-2">Write a review</h5>
+    <div class="mb-2">
+      <label class="form-label">Your name</label>
+      <input type="text" id="reviewName" class="form-control" placeholder="Enter your name">
+    </div>
+
+    <div class="mb-2">
+      <label class="form-label">Product name</label>
+      <input type="text" id="reviewProduct" class="form-control" placeholder="Which product are you reviewing?">
+    </div>
+
+    <div class="mb-2">
+      <label class="form-label d-block">Rating</label>
+      <span class="rating-star inactive" data-value="1">&#9733;</span>
+      <span class="rating-star inactive" data-value="2">&#9733;</span>
+      <span class="rating-star inactive" data-value="3">&#9733;</span>
+      <span class="rating-star inactive" data-value="4">&#9733;</span>
+      <span class="rating-star inactive" data-value="5">&#9733;</span>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Your review</label>
+      <textarea id="reviewText" class="form-control" rows="3"
+                placeholder="Share your experience with this product"></textarea>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <button class="btn btn-light" onclick="window.location.href='full.html#products'">
+        ← Back to shop
+      </button>
+      <button class="btn btn-primary" onclick="addReview()">Submit review</button>
+    </div>
+  </div>
+
+  <script>
+    let reviews = [];
+    let currentRating = 0;
+
+    // handle star click
+    document.querySelectorAll('.rating-star').forEach(star => {
+      star.addEventListener('click', () => {
+        currentRating = Number(star.dataset.value);
+        updateStars();
+      });
+    });
+
+    function updateStars() {
+      document.querySelectorAll('.rating-star').forEach(star => {
+        const val = Number(star.dataset.value);
+        if (val <= currentRating) {
+          star.classList.remove('inactive');
+        } else {
+          star.classList.add('inactive');
+        }
+      });
+    }
+
+    function addReview() {
+      const name    = document.getElementById('reviewName').value.trim() || 'Anonymous';
+      const product = document.getElementById('reviewProduct').value.trim() || 'General';
+      const text    = document.getElementById('reviewText').value.trim();
+
+      if (!text) {
+        alert('Please enter your review text.');
+        return;
+      }
+      if (currentRating === 0) {
+        alert('Please select a rating (stars).');
+        return;
+      }
+
+      reviews.push({
+        name,
+        product,
+        rating: currentRating,
+        text,
+        date: new Date().toLocaleString()
+      });
+
+      document.getElementById('reviewName').value = '';
+      document.getElementById('reviewProduct').value = '';
+      document.getElementById('reviewText').value = '';
+      currentRating = 0;
+      updateStars();
+      renderReviews();
+    }
+
+    function renderReviews() {
+  const list = document.getElementById('reviewList');
+  const msg  = document.getElementById('noReviewsMsg');
+
+  if (reviews.length === 0) {
+    list.innerHTML = '';
+    msg.style.display = 'block';
+    return;
+  }
+
+  msg.style.display = 'none';
+  list.innerHTML = reviews.map((r, index) => `
+    <div class="review-list-item">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <strong>${r.name}</strong>
+          <span style="font-size:0.85rem;" class="text-muted"> – ${r.date}</span>
+          <div style="font-size:0.9rem; opacity:0.9;">Product: ${r.product}</div>
+          <div>
+            ${'&#9733;'.repeat(r.rating)}${'&#9734;'.repeat(5 - r.rating)}
+          </div>
+        </div>
+        <button class="btn btn-sm btn-outline-danger ms-2"
+                onclick="deleteReview(${index})">
+          Delete
+        </button>
+      </div>
+      <p class="mb-0 mt-1">${r.text}</p>
+    </div>
+  `).join('');
+}
+function deleteReview(index) {
+  reviews.splice(index, 1);   // remove 1 review at that position
+  renderReviews();
+}
+
+  </script>
+</body>
+</html>

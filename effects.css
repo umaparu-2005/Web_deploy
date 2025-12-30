@@ -1,0 +1,239 @@
+<style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== BACKGROUND EFFECTS LAYER ===== */
+        .effects-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* ============================= */
+        /* 🎸 MUSIC WAVE ANIMATION */
+        /* ============================= */
+        .music-waves {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            opacity: 0.6;
+        }
+
+        .music-waves span {
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(to top, #ff0080, #00ccff);
+            animation: waveMove 1.2s ease-in-out infinite;
+            border-radius: 10px;
+        }
+
+        .music-waves span:nth-child(odd) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes waveMove {
+            0%, 100% { height: 30px; }
+            50% { height: 100px; }
+        }
+
+        /* ============================= */
+        /* 🌌 STAR / NEON PARTICLES */
+        /* ============================= */
+        .stars {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 150px 80px, #00ccff, transparent),
+                radial-gradient(1px 1px at 300px 200px, #ff0080, transparent),
+                radial-gradient(2px 2px at 90px 160px, #ff0080, transparent),
+                radial-gradient(1px 1px at 250px 120px, #00ccff, transparent),
+                radial-gradient(3px 3px at 380px 300px, #fff, transparent);
+            background-size: 400px 400px;
+            animation: starsMove 40s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes starsMove {
+            from { background-position: 0 0; }
+            to { background-position: 400px 800px; }
+        }
+
+        /* ============================= */
+        /* 🎨 LOGO COLOR GLOW */
+        /* ============================= */
+        .logo-glow {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%,
+                rgba(0,204,255,0.15),
+                rgba(255,0,128,0.12),
+                transparent 70%);
+            animation: glowPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* ============================= */
+        /* ✨ FLOATING PARTICLES */
+        /* ============================= */
+        .floating-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #00ccff, transparent);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        .particle:nth-child(1) {
+            width: 4px;
+            height: 4px;
+            top: 20%;
+            left: 10%;
+            animation-duration: 20s;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 6px;
+            height: 6px;
+            top: 60%;
+            left: 80%;
+            background: radial-gradient(circle, #ff0080, transparent);
+            animation-duration: 25s;
+            animation-delay: 5s;
+        }
+
+        .particle:nth-child(3) {
+            width: 3px;
+            height: 3px;
+            top: 80%;
+            left: 20%;
+            background: radial-gradient(circle, #fff, transparent);
+            animation-duration: 18s;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ============================= */
+        /* 📱 CONTENT LAYER */
+        /* ============================= */
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 100px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ccff, #ff0080, #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 30px rgba(0,204,255,0.5);
+            animation: logoShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes logoShimmer {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        .features {
+            display: grid;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,204,255,0.2);
+            border-color: rgba(0,204,255,0.3);
+        }
+
+        .feature h3 {
+            color: #00ccff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* ============================= */
+        /* 📱 RESPONSIVE */
+        /* ============================= */
+        @media (max-width: 768px) {
+            .content {
+                padding: 60px 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>

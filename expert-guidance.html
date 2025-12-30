@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Guidance</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; color: #333; }
+        .expert-section {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.138), rgba(255, 237, 237, 0.55)),
+        url("exx.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+.expert-section h1,
+.expert-section p {
+    color: #fff;
+}
+        .container { max-width: 1200px; margin: 0 auto; }
+        .expert-section h1 { text-align: center; color: #333; margin-bottom: 20px; font-size: 2.5rem; }
+        .expert-section p { text-align: center; max-width: 600px; margin: 0 auto 40px; color: #080000; }
+        .guidance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .guidance-card { background: rgba(237, 212, 249, 0.696); padding: 16px 20px; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .guidance-card:hover { transform: translateY(-5px); }
+        .guidance-card h3 { color: #2e537b; margin-bottom: 15px; font-size: 1.3rem; }
+        .back-link { text-align: center; margin-top: 40px; }
+        .back-link a { color: #007bff; text-decoration: none; font-weight: 500; }
+
+        .guidance-card { cursor: pointer; }
+
+.popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #bda4a4;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+}
+
+.close-btn {
+    text-align: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <section class="expert-section">
+        <div class="container">
+            <h1>Expert Guidance</h1>
+            <p>Curated advice from industry specialists to optimize your workflow and avoid common pitfalls.</p>
+            <div class="guidance-card" onclick="openPopup('buy')">
+    <h3>Buying Instruments</h3>
+    <p>Expert tips on choosing the right instrument.</p>
+</div>
+
+<div class="guidance-card" onclick="openPopup('practice')">
+    <h3>Practice Techniques</h3>
+    <p>Daily routines used by professionals.</p>
+</div>
+
+<div class="guidance-card" onclick="openPopup('mistakes')">
+    <h3>Avoid Common Mistakes</h3>
+    <p>Learn what beginners usually get wrong.</p>
+</div>
+                <div class="popup" id="popup">
+    <div class="popup-content">
+        <div class="close-btn" onclick="closePopup()">✖</div>
+        <h2 id="popupTitle"></h2>
+        <p id="popupText"></p>
+    </div>
+</div>
+            </div>
+            <div class="back-link">
+                <a href="full.html">← Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+<script>
+function openPopup(type) {
+    const title = document.getElementById("popupTitle");
+    const text = document.getElementById("popupText");
+
+    if (type === "buy") {
+        title.innerText = "Buying Instruments";
+        text.innerText = "Choose instruments based on your skill level, sound preference, and comfort.";
+    }
+    if (type === "practice") {
+        title.innerText = "Practice Techniques";
+        text.innerText = "Practice slowly, use a metronome, and focus on consistency.";
+    }
+    if (type === "mistakes") {
+        title.innerText = "Avoid Common Mistakes";
+        text.innerText = "Avoid rushing, poor posture, and skipping fundamentals.";
+    }
+
+    document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+</script>
+
+</body>
+</html>

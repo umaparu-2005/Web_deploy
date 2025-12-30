@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="has-effects" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | InstruHaven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="effects.css">
+    
+    <style>
+        /* --------- GLOBAL STYLES --------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        /* --------- EFFECTS LAYER --------- */
+        .effects-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* --------- SLIDESHOW BACKGROUND --------- */
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: slideShow 18s infinite;
+        }
+
+        .slide:nth-child(1) { animation-delay: 0s; }
+        .slide:nth-child(2) { animation-delay: 6s; }
+        .slide:nth-child(3) { animation-delay: 12s; }
+
+        @keyframes slideShow {
+            0%   { opacity: 0; }
+            10%  { opacity: 1; }
+            30%  { opacity: 1; }
+            40%  { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .slideshow::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(43, 10, 61, 0.8); 
+            z-index: 1;
+            backdrop-filter: blur(2px);
+        }
+
+        /* --------- LOGIN CONTAINER --------- */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 50px 40px;
+            border-radius: 25px;
+            width: 420px;
+            box-shadow: 0 20px 60px rgba(255, 0, 128, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(94, 32, 63, 0.8);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        label {
+            color: #ffffff;
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2);
+            outline: none;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            background: rgba(132, 10, 10, 0.25);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
+            border-color: #a5356d;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ffbcdd, #00ccff);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(255, 0, 128, 0.4);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 204, 255, 0.6);
+        }
+
+        .extra {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .extra a {
+            color: #bae9f5;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .extra a:hover {
+            text-decoration: underline;
+            color: #ffbadd;
+        }
+
+        /* ✅ BACK LINK INSIDE BOX */
+        .back-link {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .back-link a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .back-link a:hover {
+            color: #ffb7db;
+            text-shadow: 0 0 10px rgb(255, 210, 232);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 40px 25px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Effects Layer -->
+    <div class="effects-layer">
+        <div class="stars"></div>
+        <div class="logo-glow"></div>
+        <div class="music-waves">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <!-- Slideshow Background -->
+    <div class="slideshow">
+        <div class="slide" style="background-image: url('minss.jpeg');"></div>
+        <div class="slide" style="background-image: url('minss.jpeg');"></div>
+        <div class="slide" style="background-image: url('minss.jpeg');"></div>
+    </div>
+
+    <!-- Login Box WITH BACK LINK INSIDE ✅ -->
+    <div class="container">
+        <h2>Welcome to InstruHaven 🎹</h2>
+        <div class="subtitle"><b>Find Your Sound 🎧</b></div>
+
+        <form onsubmit="login(event)" autocomplete="off">
+            <label><b>Email</b></label>
+            <input type="email" id="email" placeholder="Enter your email" required autocomplete="off">
+
+            <label><b>Password</b></label>
+            <input type="password" id="password" placeholder="Enter your password" required autocomplete="new-password">
+
+            <button type="submit">Login</button>
+
+            <div class="extra">
+                <h4>Don't have an account? <a href="#" onclick="return signup()">Sign Up</a></h4>
+            </div>
+
+            <!-- ✅ BACK LINK INSIDE THE BOX -->
+            <div class="back-link">
+                <a href="full.html">
+                    <i class="bi bi-arrow-left"></i> Back to Home
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function login(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (email !== "" && password !== "") {
+                // Save login state
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+                alert('Login successful! 🎉');
+                window.location.href = "full.html";
+            } else {
+                alert("Please enter email and password");
+            }
+        }
+
+        function signup() {
+            document.querySelector("h2").textContent = "Create Account";
+            document.querySelector(".subtitle").textContent = "Start Your Musical Journey 🎼!";
+            document.querySelector("button").textContent = "Create Account";
+            document.querySelector(".extra h4").innerHTML = 'Already have an account? <a href="#" onclick="return loginMode()">Login</a>';
+            return false;
+        }
+
+        function loginMode() {
+            document.querySelector("h2").textContent = "Welcome to InstruHaven 🎹";
+            document.querySelector(".subtitle").textContent = "Find Your Sound 🎧";
+            document.querySelector("button").textContent = "Login";
+            document.querySelector(".extra h4").innerHTML = 'Don\'t have an account? <a href="#" onclick="return signup()">Sign Up</a>';
+            return false;
+        }
+
+        // Check if already logged in
+        if (localStorage.getItem('isLoggedIn') === 'true' && 
+    !window.location.pathname.includes("login.html")) {
+    window.location.href = "full.html";
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="has-effects" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishlist | InstruHaven</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Effects CSS -->
+    <link rel="stylesheet" href="effects.css">
+    
+    <style>
+        * { font-family: 'Poppins', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #2b0a3d, #0f172a);
+            color: #fff;
+            padding-top: 110px;
+        }
+        
+        /* Navbar & Icon Bar */
+        .navbar { backdrop-filter: blur(10px); background: rgba(0,0,0,0.4); }
+        .icon-bar {
+            background: rgba(0,0,0,0.35);
+            padding: 8px 0;
+            position: sticky;
+            top: 56px;
+            z-index: 900;
+        }
+        .icon-bar .icon-btn {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+        .icon-bar .icon-btn i { font-size: 1.2rem; }
+        
+        /* Counter Badges */
+        .cart-badge, .wishlist-badge {
+            background: #ff0080;
+            color: white;
+            border-radius: 50%;
+            width: 24px; height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-left: 5px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Wishlist Styles */
+        .wishlist-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.06);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+        }
+        .wishlist-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        .wishlist-item:hover { 
+            transform: translateX(5px); 
+            box-shadow: 0 10px 30px rgba(255,0,128,0.3); 
+            border: 1px solid rgba(255,0,128,0.5);
+        }
+        .wishlist-item img { 
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: 12px; 
+        }
+        .wishlist-item-info { 
+            flex-grow: 1; 
+        }
+        .wishlist-item-info h5 { 
+            margin: 0 0 5px 0; 
+            color: #00ccff; 
+        }
+        .wishlist-item-info p { 
+            margin: 0; 
+            opacity: 0.8; 
+        }
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .add-to-cart-btn {
+            background: linear-gradient(45deg, #00ccff, #ff0080);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,204,255,0.3);
+            transition: all 0.3s;
+        }
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,0,128,0.5);
+        }
+        .remove-btn {
+            background: #ef4444;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .remove-btn:hover { background: #dc2626; }
+        
+        .wishlist-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .empty { 
+            text-align: center; 
+            padding: 80px 20px; 
+            opacity: 0.6; 
+        }
+        .empty i { font-size: 5rem; opacity: 0.4; margin-bottom: 20px; }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="full.html">
+                <img src="logos.jpeg" alt="Logo" style="height:30px; width:auto;" class="me-2;">
+                InstruHaven
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+          <li class="nav-item"><a class="nav-link" href="#products">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="#top-brands">Top Brands</a></li>
+          <li class="nav-item"><a class="nav-link" href="#why-us">Why Choose Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="review.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">LOGIN</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Icon Bar with LIVE COUNTERS -->
+    <div class="icon-bar text-center">  
+    <a href="#home" class="icon-btn"><i class="bi bi-house-fill"></i><span>Home</span></a>
+    <a href="cart.html" class="icon-btn" id="cartLink">
+        <i class="bi bi-bag-fill"></i><span>Cart</span>
+        <span class="cart-badge" id="cartCount">0</span>
+    </a>
+    <a href="wishlist.html" class="icon-btn" id="wishlistLink">
+        <i class="bi bi-heart-fill"></i><span>Wishlist</span>
+        <span class="wishlist-badge" id="wishlistCount">0</span>
+    </a>
+    <a href="expert-guidance.html" class="icon-btn"><i class="bi bi-person-badge-fill"></i><span>Expert guidance</span></a>
+</div>
+
+    <!-- Effects Layer -->
+    <div class="effects-layer">
+        <div class="stars"></div>
+        <div class="logo-glow"></div>
+        <div class="music-waves">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
+        <div class="floating-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <!-- Wishlist Content -->
+    <div class="wishlist-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>❤️ My Wishlist</h2>
+            <a href="full.html" class="btn btn-outline-light">
+                <i class="bi bi-arrow-left"></i> Back to Shop
+            </a>
+        </div>
+        
+        <div id="wishlistItems"></div>
+        <div class="wishlist-footer" id="wishlistFooter" style="display: none;">
+            <span>Total Wishlist Items: <span id="wishlistTotal">0</span></span>
+        </div>
+        <div class="empty" id="emptyWishlist" style="display: none;">
+            <i class="bi bi-heartbreak-fill"></i>
+            <h3>Your wishlist is empty</h3>
+            <p>Add your favorite instruments from the shop!</p>
+            <a href="full.html" class="btn btn-outline-info btn-lg mt-3">
+                <i class="bi bi-shop"></i> Start Shopping
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        function updateCounters() {
+            const cartCount = document.getElementById('cartCount');
+            const wishlistCount = document.getElementById('wishlistCount');
+            if (cartCount) cartCount.textContent = cart.length;
+            if (wishlistCount) wishlistCount.textContent = wishlist.length;
+        }
+
+        function loadWishlist() {
+            const wishlistItems = document.getElementById('wishlistItems');
+            const emptyWishlist = document.getElementById('emptyWishlist');
+            const wishlistFooter = document.getElementById('wishlistFooter');
+            
+            if (wishlist.length === 0) {
+                wishlistItems.style.display = 'none';
+                emptyWishlist.style.display = 'block';
+                wishlistFooter.style.display = 'none';
+                return;
+            }
+            
+            wishlistItems.style.display = 'block';
+            emptyWishlist.style.display = 'none';
+            wishlistFooter.style.display = 'block';
+            
+           wishlistItems.innerHTML = wishlist.map((item, index) => {
+    const imageSrc = item.image && item.image.trim() ? item.image.trim() : 'https://via.placeholder.com/100x100/00ccff/fff?text=No+Image';
+    return `
+        <div class="wishlist-item">
+            <div class="wishlist-item-info">
+                <h5>${item.name || 'Unknown Item'}</h5>
+                <p>${item.price || 'Price unavailable'}</p>
+            </div>
+            <div class="action-buttons">
+                <button class="add-to-cart-btn" onclick="addToCartFromWishlist(${index})">
+                    <i class="bi bi-bag-plus"></i> Add to Cart
+                </button>
+                <button class="remove-btn" onclick="removeFromWishlist(${index})">
+                    <i class="bi bi-trash"></i> Remove
+                </button>
+            </div>
+        </div>
+    `;
+}).join('');
+            
+            document.getElementById('wishlistTotal').textContent = wishlist.length;
+            updateCounters();
+        }
+
+        function updateCounters() {
+    const cartCount = document.getElementById('cartCount');
+    const wishlistCount = document.getElementById('wishlistCount');
+    
+    if (cartCount) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    }
+    
+    if (wishlistCount) {
+        const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        wishlistCount.textContent = wishlist.length;
+    }
+}
+
+// Call on load and storage change
+document.addEventListener('DOMContentLoaded', updateCounters);
+window.addEventListener('storage', updateCounters);
+
+
+        function addToCartFromWishlist(index) {
+            const item = wishlist[index];
+            const cartItem = { name: item.name, price: item.price, image: item.image, quantity: 1 };
+            
+            const existing = cart.find(cartItem => cartItem.name === item.name);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push(cartItem);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCounters();
+            alert(`✅ ${item.name} added to cart! 🛒`);
+        }
+
+        function removeFromWishlist(index) {
+            wishlist.splice(index, 1);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            loadWishlist();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+    loadWishlist();
+    updateCounters();
+});
+        window.addEventListener('storage', loadWishlist);
+    </script>
+</body>
+</html>
